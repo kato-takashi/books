@@ -17,7 +17,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	// Do any additional setup after loading the view.
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 400, 100, 100)];
+    //    UIViewオブジェクトの背景色のデフォルト値は透明なため背景色を別の色に設定
+    view.backgroundColor = [UIColor redColor];
+    //    viewプロパティにサブビューを追加
+    [self.view addSubview:view];
 }
 
 - (void)didReceiveMemoryWarning

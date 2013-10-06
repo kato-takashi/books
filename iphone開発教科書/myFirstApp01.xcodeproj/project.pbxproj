@@ -480,6 +480,7 @@
 				20EA9A7A17FFECB1005A3C56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		20EA9A7B17FFECB1005A3C56 /* Build configuration list for PBXNativeTarget "myFirstApp01Tests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +489,7 @@
 				20EA9A7D17FFECB1005A3C56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
