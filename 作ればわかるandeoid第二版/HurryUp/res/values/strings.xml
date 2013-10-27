@@ -2,7 +2,13 @@
 <resources>
 
     <string name="app_name">いそいで計算</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="answer_is">答えは</string>
+    <string name="result_is">正解数は</string>
+    <string name="chronometer_format">経過時間：%s</string>
+    <string name="start">スタート</string>
+    <string name="hantei">判定</string>
+    <string name="correct">正解です</string>
+    <string name="incorrect">間違いです</string>
+    <string name="alert_dialog_ok">OK</string>
 
 </resources>
