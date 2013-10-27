@@ -2,6 +2,7 @@ package com.example.hurryup;
 
 import android.app.Activity;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,22 +12,22 @@ import android.widget.TextView;
 public class HurryUpActivity extends Activity {
 	// 数字のImageButton
 	static final int imageButtons[] = { R.id.num_button1, R.id.num_button2,
-			R.id.num_button3, R.id.num_button4, R.id.num_button5,
-			R.id.num_button6, R.id.num_button7, R.id.num_button8,
-			R.id.num_button9, R.id.num_button10, R.id.num_button11,
-			R.id.num_button12, };
+		R.id.num_button3, R.id.num_button4, R.id.num_button5,
+		R.id.num_button6, R.id.num_button7, R.id.num_button8,
+		R.id.num_button9, R.id.num_button10, R.id.num_button11,
+		R.id.num_button12, };
 	// 数字の画像
 	static final int numImages[] = { R.drawable.num1, R.drawable.num2,
-			R.drawable.num3, R.drawable.num4, R.drawable.num5, R.drawable.num6,
-			R.drawable.num7, R.drawable.num8, R.drawable.num9,
-			R.drawable.num10, R.drawable.num11, R.drawable.num12, };
+		R.drawable.num3, R.drawable.num4, R.drawable.num5, R.drawable.num6,
+		R.drawable.num7, R.drawable.num8, R.drawable.num9,
+		R.drawable.num10, R.drawable.num11, R.drawable.num12, };
 	// 演算子のImageButton
 	static final int opeButtons[] = { R.id.ope_button1, R.id.ope_button2,
-			R.id.ope_button3, R.id.ope_button4, };
+		R.id.ope_button3, R.id.ope_button4, };
 
 	// 演算子の画像
 	static final int opeImages[] = { R.drawable.plus, R.drawable.minus,
-			R.drawable.mul, R.drawable.div, };
+		R.drawable.mul, R.drawable.div, };
 
 	// フィールド
 	private int mAnswer = 0;
@@ -81,7 +82,7 @@ public class HurryUpActivity extends Activity {
 		startChronometer();
 		syutudai();
 	}
-	
+
 	private void syutudai(){
 		//TODO自動生成されたメソッド・スタブ
 		clearAnswer();
@@ -121,16 +122,22 @@ public class HurryUpActivity extends Activity {
 			mAnswer = a/b;
 			break;
 		}
-		Resouces res = getResouces();
+		Resources res = getResources();
 		String ansString = res.getString(R.string.answer_is) + " " + mAnswer;
 		TextView textAnswer = (TextView)findViewById(R.id.text_answer);
 		textAnswer.setText(ansString);
-		
-		private void clearAnswer(){
-			mAvalue = 0;
-			mBvalue = 0;
-			mOpe = 0;
-		}
 	}
-
+	private void clearAnswer(){
+		mAvalue = 0;
+		mBvalue = 0;
+		mOpe = 0;
+		ImageButton imgbtn = (ImageButton)findViewById(R.id.a_button);
+		imgbtn.setImageResource(R.drawable.clear);
+		imgbtn = (ImageButton)findViewById(R.id.x_button);
+		imgbtn.setImageResource(R.drawable.clear);
+		imgbtn = (ImageButton)findViewById(R.id.b_button);
+		imgbtn.setImageResource(R.drawable.clear);
+	}
 }
+
+
