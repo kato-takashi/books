@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">らくらくメール</string>
+    <string name="iiwake">いいわけ</string>
+    <string name="iitaikoto">いいたいこと</string>
+    <string name="sime">締め</string>
+    <string name="title">タイトル</string>
+    <string name="content">本文</string>
+    <string name="button_ok">OK</string>
+    <string name="button_send">送信</string>
+    <string name="mail_to">mail address</string>
+
+</resources>

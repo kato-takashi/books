@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "iiwakeItems">
+        <item >急に飲みに行くことになったので、</item>
+        <item >突然会議が入ったので、</item>
+        <item >トラブルが発生したので、</item>
+    </string-array>
+    <string-array name = "iitaikotoItems">
+        <item >飯いらない。</item>
+        <item >遅くなる。</item>
+        <item >帰れないかもしれない。</item>
+    </string-array>
+    <string-array name = "simeItems">
+        <item >すいません。(-_-;)</item>
+        <item >ごめんね。m(__)m</item>
+        <item >愛してる。☆彡</item>
+    </string-array>
+</resources>
