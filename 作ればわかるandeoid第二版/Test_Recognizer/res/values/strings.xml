@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">音声認識のテスト</string>
+    <string name="Recognize">音声認識</string>
+    <string name="start">音声認識の開始</string>
+</resources>
