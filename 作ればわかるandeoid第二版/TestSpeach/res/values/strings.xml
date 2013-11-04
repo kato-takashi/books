@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">テキスト読み上げテスト</string>
+    <string name="Speech">Speech</string>
+    
+</resources>
