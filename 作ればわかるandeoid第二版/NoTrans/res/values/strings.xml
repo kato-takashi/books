@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">翻訳しない君</string>
+    <string name="someone">相手</string>
+    <string name="you">あなた</string>
+	<string name="button_hear">聞く</string>
+	<string name="button_speech">話す</string>
+	<string name="button_ok">OK</string>
+	<string name="talk">会話</string>
+	<string name="please_speak">Please, Speak in English.</string>
+</resources>
