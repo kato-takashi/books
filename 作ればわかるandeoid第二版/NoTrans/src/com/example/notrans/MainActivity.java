@@ -1,14 +1,20 @@
 package com.example.notrans;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity 
 implements View.OnClickListener, TextToSpeech.OnInitListener{
@@ -72,20 +78,54 @@ implements View.OnClickListener, TextToSpeech.OnInitListener{
 	}
 
 	public void StartRecognize(){
+		try{
+			Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+			intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.US.toString());
+			intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.please_speak));
+			intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, MAX_RESULT);
+			startActivityForResult(intent, REQUEST_CODE);
 
+		}catch(ActivityNotFoundException e){
+			Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-
+		if(requestCode == REQUEST_CODE && resultCode == RESULT_OK ){
+			ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			EditText edSomeOne = (EditText)findViewById(R.id.ed_someone);
+			edSomeOne.setText(results.get(0));
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	public void StartSpeech(){
+		EditText edYou = (EditText)findViewById(R.id.ed_you);
+		String strSpeech = edYou.getText().toString();
+		if(strSpeech.length() == 0) return;
+		if(tts.isSpeaking()){
+			tts.stop();
+		}
+		tts.setSpeechRate(SPEECH_RATE);
+		tts.setPitch(SPEECH_PITCH);
+		tts.speak(strSpeech, TextToSpeech.QUEUE_FLUSH, null);
 
 	}
 
 	public void Edit2TextView(){
-
+		EditText edSomeone = (EditText)findViewById(R.id.ed_someone);
+		EditText edYou = (EditText)findViewById(R.id.ed_you);
+		TextView tvTalk = (TextView)findViewById(R.id.tv_talk);
+		if((edSomeone.getText().toString()).length()>0){
+			tvTalk.append(getString(R.string.someone)+":"+ edSomeone.getText().toString() + "\n");
+			edYou.setText("");
+		}
+		if((edYou.getText().toString()).length()>0){
+			tvTalk.append(getString(R.string.you)+":"+ edYou.getText().toString() + "\n");
+			edYou.setText("");
+		}
 	}
 
 
