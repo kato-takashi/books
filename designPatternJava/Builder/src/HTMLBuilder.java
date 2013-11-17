@@ -1,42 +1,33 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.io.*;
 
 public class HTMLBuilder extends Builder {
-	private String filename;
-	private PrintWriter writer;
-	public void makeTitle(String title){
-		filename = title + ".html";
-		try{
-			writer = new PrintWriter(new FileWriter(filename));
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		writer.println("<html><head><title>"+ title +"</title></head></body>");
-		writer.println("<h1>"+ title +"</h1>");
-	}
-	
-	public void makeString(String str){
-		writer.println("<p>" + str + "</p>");
-	}
-	
-	public void makeItems(String[] items){
-		writer.println("<ul>");
-		for(int i=0; i < items.length; i++){
-			writer.println("<li>" + items[i] +"</li>");
-		}
-		writer.println("</ul>");
-	}
-	
-	public void close(){
-		writer.println("</body></html>");
-		writer.close();
-	}
-	
-	public String getReslts(){
-		return filename;
-		
-	}
-	
+    private String filename;                                    // 作成するファイル名
+    private PrintWriter writer;                                 // ファイルに書き込むPrintWriter
+    public void makeTitle(String title) {                       // HTMLファイルでのタイトル
+        filename = title + ".html";                                 // タイトルを元にファイル名決定
+        try {
+            writer = new PrintWriter(new FileWriter(filename));     // PrintWriterを作る
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        writer.println("<html><head><title>" + title + "</title></head><body>");    // タイトルを出力
+        writer.println("<h1>" + title + "</h1>");
+    }
+    public void makeString(String str) {                        // HTMLファイルでの文字列
+        writer.println("<p>" + str + "</p>");                       // <p>タグで出力
+    }
+    public void makeItems(String[] items) {                     // HTMLファイルでの箇条書き
+        writer.println("<ul>");                                     // <ul>と<li>で出力
+        for (int i = 0; i < items.length; i++) {
+            writer.println("<li>" + items[i] + "</li>");
+        }
+        writer.println("</ul>");
+    }
+    public void close() {                                       // 文書の完成
+        writer.println("</body></html>");                           // タグを閉じる
+        writer.close();                                             // ファイルをクローズ
+    }
+    public String getResult() {                                 // 完成した文書
+        return filename;                                            // ファイル名を返す
+    }
 }
