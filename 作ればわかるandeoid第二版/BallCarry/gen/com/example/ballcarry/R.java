@@ -27,9 +27,12 @@ public final class R {
         public static final int activity_ball_carry=0x7f030000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
+        public static final int failed=0x7f050004;
+        public static final int goal=0x7f050001;
+        public static final int goaled=0x7f050003;
+        public static final int is_continue=0x7f050005;
+        public static final int start=0x7f050002;
     }
     public static final class style {
         /** 
