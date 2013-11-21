@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TorchSamp</string>
+    <string name="light_on">ライトON</string>
+    <string name="light_off">ライトOFF</string>
+
+</resources>
