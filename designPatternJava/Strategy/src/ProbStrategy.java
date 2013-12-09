@@ -27,5 +27,18 @@ public class ProbStrategy implements Strategy{
 		}else{
 			handvalue = 2;
 		}
+		
+		prevHandValue = currentHandValue;
+		currentHandValue = handvalue;
+		return Hand.getHand(handvalue);
+	}
+	
+	private int getSum(int hv){
+		int sum = 0;
+		return sum;
+	}
+	
+	public void study(boolean win){
+		
 	}
 }
