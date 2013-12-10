@@ -8,7 +8,7 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
-public class MainActivity extends ListActivity {
+public class ListMain extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

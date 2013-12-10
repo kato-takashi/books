@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Day04ListView</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    <string name="hello">Hello World, Chapter04!</string>
+    <string name="app_name">Chapter04</string>
+    <string name="lbSave">保存</string>
+    <string name="lbCancel">キャンセル</string>
+    <string name="lbSaveTitle">保存確認</string>
+    <string name="lbYes">はい</string>
+    <string name="lbNo">いいえ</string>
 </resources>
