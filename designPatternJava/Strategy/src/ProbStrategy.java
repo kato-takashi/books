@@ -35,10 +35,19 @@ public class ProbStrategy implements Strategy{
 	
 	private int getSum(int hv){
 		int sum = 0;
+		for(int i=0; i<3; i++){
+			sum += history[hv][i];
+		}
 		return sum;
 	}
 	
 	public void study(boolean win){
+		if(win){
+			history[prevHandValue][currentHandValue]++;
+		}else{
+			history[prevHandValue][(currentHandValue+1)%3]++;
+			history[prevHandValue][(currentHandValue+2)%3]++;
+		}
 		
 	}
 }
