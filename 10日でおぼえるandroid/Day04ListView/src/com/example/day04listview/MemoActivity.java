@@ -1,8 +1,5 @@
 package com.example.day04listview;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,11 +19,10 @@ public class MemoActivity extends Activity {
 
 	// SharedPreferencesのインスタンス
 	private SharedPreferences mPrefs;
-	
-	//パラメータで受け取った日付
+
+	// パラメータで受け取った日付
 	private long mDate = 0;
-	
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,27 +32,22 @@ public class MemoActivity extends Activity {
 		// SharedPreferencesのインスタンスを取得
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-		// SharedPreferencesから"content"の値を取得する
-		//String content = mPrefs.getString("content", "");
-		
-		//Intentから日付を取得
+		// Intentから日付を取得する
 		Intent intent = getIntent();
-		if(intent != null){
-			if(intent.hasExtra(Defines.KEY_DATE)){
+		if (intent != null) {
+			if (intent.hasExtra(Defines.KEY_DATE)) {
 				mDate = intent.getLongExtra(Defines.KEY_DATE, 0);
 			}
 		}
-		//SharedPreferencesから"content"の値を取得する
+
+		// SharedPreferencesから"content"の値を取得する
 		String content = mPrefs.getString(getKey(mDate), "");
 
-		// 日付を整形出力するためのフォーマッターを生成
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd (E)");
-
 		// 今日のカレンダーを取得
-		//Calendar cal = Calendar.getInstance();
+		// Calendar cal = Calendar.getInstance();
 
 		// 今日の日付を文字列に変換する
-		String date = fmt.format(mDate);
+		String date = Defines.sFmt.format(mDate);
 
 		TextView txtsubject = (TextView) findViewById(R.id.TextView01);
 		EditText txtcontent = (EditText) findViewById(R.id.EditText01);
@@ -64,9 +55,15 @@ public class MemoActivity extends Activity {
 		txtsubject.setText(date);
 		txtcontent.setText(content);
 	}
-	
-	private String getKey(long value){
-		return "key."+value;
+
+	/***
+	 * 設定ファイルから値を取得するKEYを生成
+	 * 
+	 * @param value
+	 * @return
+	 */
+	private String getKey(long value) {
+		return "key." + value;
 	}
 
 	public void onClickButton(View view) {
@@ -79,8 +76,7 @@ public class MemoActivity extends Activity {
 				        @Override
 				        public void onClick(DialogInterface dialog, int which) {
 					        // 保存処理
-                            EditText txtcontent = 
-                                (EditText) findViewById(R.id.EditText01);
+					        EditText txtcontent = (EditText) findViewById(R.id.EditText01);
 					        String content = txtcontent.getText().toString();
 
 					        // 保存されたデータを確認する
@@ -90,7 +86,7 @@ public class MemoActivity extends Activity {
 					        Editor editor = mPrefs.edit();
 
 					        // "content"に入力された文字列を設定する
-					        editor.putString("content", content);
+					        editor.putString(getKey(mDate), content);
 
 					        // 設定を反映する
 					        editor.commit();
