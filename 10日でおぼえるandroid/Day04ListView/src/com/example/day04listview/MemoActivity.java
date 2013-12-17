@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -21,7 +22,11 @@ public class MemoActivity extends Activity {
 
 	// SharedPreferencesのインスタンス
 	private SharedPreferences mPrefs;
-
+	
+	//パラメータで受け取った日付
+	private long mDate = 0;
+	
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,22 +37,36 @@ public class MemoActivity extends Activity {
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 		// SharedPreferencesから"content"の値を取得する
-		String content = mPrefs.getString("content", "");
+		//String content = mPrefs.getString("content", "");
+		
+		//Intentから日付を取得
+		Intent intent = getIntent();
+		if(intent != null){
+			if(intent.hasExtra(Defines.KEY_DATE)){
+				mDate = intent.getLongExtra(Defines.KEY_DATE, 0);
+			}
+		}
+		//SharedPreferencesから"content"の値を取得する
+		String content = mPrefs.getString(getKey(mDate), "");
 
 		// 日付を整形出力するためのフォーマッターを生成
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd (E)");
 
 		// 今日のカレンダーを取得
-		Calendar cal = Calendar.getInstance();
+		//Calendar cal = Calendar.getInstance();
 
 		// 今日の日付を文字列に変換する
-		String date = fmt.format(cal.getTime());
+		String date = fmt.format(mDate);
 
 		TextView txtsubject = (TextView) findViewById(R.id.TextView01);
 		EditText txtcontent = (EditText) findViewById(R.id.EditText01);
 
 		txtsubject.setText(date);
 		txtcontent.setText(content);
+	}
+	
+	private String getKey(long value){
+		return "key."+value;
 	}
 
 	public void onClickButton(View view) {
