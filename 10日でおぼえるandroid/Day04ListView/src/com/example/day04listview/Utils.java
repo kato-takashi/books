@@ -66,8 +66,41 @@ public class Utils {
 					DatabaseHelper.FIELD_DATE+" = ?", 
 					new String[]{Long.toString(date)});
 		}finally{
-			//未記入
+			//終了処理
+			if(db != null){
+				db.close();
+			}
+			if(helper != null){
+				helper.close();
+			}
 		}
-
+	}
+	
+	//コンテンツを新しく登録
+	public static void createContents(Context context, long date, String contents){
+		DatabaseHelper helper = null;
+		SQLiteDatabase db = null;
+		try{
+			//Helperクラスの生成
+			helper = new DatabaseHelper(context);
+			//書き込み用SQLitedatabaseを生成
+			db = helper.getWritableDatabase();
+			
+			//書き込み用のデータを作成
+			ContentValues values = new ContentValues();
+			values.put(DatabaseHelper.FIELD_DATE, date);
+			values.put(DatabaseHelper.FIELD_CONTENTS, contents);
+			
+			//インサート処理の実行
+			db.insert(DatabaseHelper.TABLE_DIARY, null, values);
+		}finally{
+			//終了処理
+			if(db != null){
+				db.close();
+			}
+			if(helper != null){
+				helper.close();
+			}
+		}
 	}
 }
