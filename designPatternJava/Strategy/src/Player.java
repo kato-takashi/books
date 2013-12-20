@@ -10,7 +10,7 @@ public class Player {
 		this.name = name;
 		this.strategy = strategy;
 	}
-	public Hand nexthand(){ //戦略におうかがいをたてる
+	public Hand nextHand(){ //戦略におうかがいをたてる
 		return strategy.nextHand();
 	}
 	public void win(){ //勝った
@@ -27,7 +27,7 @@ public class Player {
 		gamecount++;
 	}
 	public String toString(){
-		return "[" + ":" + gamecount + "games, " + wincount + "win, " + losecount + "lose" + "]";
+		return "[" + name + ":" + gamecount + " games, " + wincount + " win, " + losecount + " lose" + "]";
 	}
 
 }
