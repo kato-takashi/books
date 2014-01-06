@@ -3,7 +3,6 @@ package com.example.day04listview;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 public class Utils {
@@ -44,7 +43,7 @@ public class Utils {
 
 	public static void updateContents(Context context, long date, String contents){
 		//書き込み用のデータを作成する
-		ContentValues values = new Contentvalues();
+		ContentValues values = new ContentValues();
 		values.put(FIELD_CONTENTS, contents);
 		
 		//更新処理の実行をする
@@ -57,7 +56,7 @@ public class Utils {
 	//	@return
 	public static void createContents(Context context, long date, String contents){
 		//書き込み用のデータを作成する
-		ContentValues values = new Contentvalues();
+		ContentValues values = new ContentValues();
 		values.put(FIELD_DATE, date);
 		values.put(FIELD_CONTENTS, contents);
 		
