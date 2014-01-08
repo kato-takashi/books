@@ -1,50 +1,76 @@
 package com.example.day04listview;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.net.ParseException;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class ListMain extends ListActivity {
+	// 検索ボックスのインスタンス
+    EditText mEditText;
+    // 検索結果を保持するCursor
+    Cursor mCursor;
+    
+    @Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.listmain);
+		//画面オブジェクトを取得
+		mEditText = (EditText)findViewById(R.id.EditText01);
+
+		//プロバイダが更新されたらリストを更新するリスナーを設定
+		getContentResolver().registerContentObserver(Utils.CONTENT_URI, true, new ContentObserver(new Handler()){
+			@Override
+			public void onChange(boolean selfChange){
+				serchList();
+			}
+		});
+		// 初期データ読み込み
+		serchList();
+	}
+    
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onListItemClick(l, v, position, id);
 
 		//選択したアイテムから日付を取得する
-		String date = (String) l.getAdapter().getItem(position);
-		try{
-			Date dtime = Defines.sFmt.parse(date);
+		CursorAdapter adapter = (CursorAdapter) l.getAdapter();
+		Cursor cursor = adapter.getCursor();
+		if(cursor != null){
 			//MemoActivityを呼び出すIntentを生成
 			Intent intent = new Intent(this, MemoActivity.class);
-			//パラメータに選択した日付を設定
-			intent.putExtra(Defines.KEY_DATE, dtime.getTime());
-			//			Intentを呼び出し実行する
+			//パラメーターに選択した日付を設定
+			intent.putExtra(Defines.KEY_DATE, cursor.getLong(cursor.getColumnIndex(Utils.FIELD_DATE)));
+			//intentの呼び出し実行
 			startActivity(intent);
-
-		}catch(java.text.ParseException e){
-
 		}
 	}
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.listmain);
-
-		//		今月の日付の一覧をリストにして返却
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, selectDays());
-		//		ArrayAdapterをリストに設定する
-		getListView().setAdapter(adapter);
+	
+	private void searchList(){
+		// 検索ボックスに入力された内容でデータを検索しリストに表示
+		String search = mEditText.getText().toString();
+		String where = null;
+		if(search.length()>0){
+			where = Utils.FIELD_CONTENTS + "LIKE '%" + search + "%'";
+		}
+		if( mCursor != null){
+			stopManagingCursor(mCursor);
+			mCursor.close();
+			mCursor = null;
+		}
 	}
-
+	
+////////////
 	private ArrayList<String> selectDays(){
 		ArrayList<String> ret = new ArrayList<String>();
 
