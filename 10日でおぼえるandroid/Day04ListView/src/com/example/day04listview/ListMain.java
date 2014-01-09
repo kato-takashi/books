@@ -31,11 +31,11 @@ public class ListMain extends ListActivity {
 		getContentResolver().registerContentObserver(Utils.CONTENT_URI, true, new ContentObserver(new Handler()){
 			@Override
 			public void onChange(boolean selfChange){
-				serchList();
+				searchList();
 			}
 		});
 		// 初期データ読み込み
-		serchList();
+		searchList();
 	}
     
 	@Override
@@ -56,6 +56,7 @@ public class ListMain extends ListActivity {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void searchList(){
 		// 検索ボックスに入力された内容でデータを検索しリストに表示
 		String search = mEditText.getText().toString();
@@ -68,25 +69,15 @@ public class ListMain extends ListActivity {
 			mCursor.close();
 			mCursor = null;
 		}
-	}
-	
-////////////
-	private ArrayList<String> selectDays(){
-		ArrayList<String> ret = new ArrayList<String>();
-
-		//		今日のカレンダーを取得
-		Calendar cal = Calendar.getInstance();
-
-		//		月の最大日数分だけ繰り返す
-		int maxday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		for(int i=0; i < maxday; i++){
-			cal.set(Calendar.DAY_OF_MONTH, i+1);
-			//			整形した日付の文字列をイストに追加する
-			String datestr = Defines.sFmt.format(cal.getTime());
-			ret.add(datestr);
+		//検索処理の実行
+		mCursor = managedQuery(Utils.CONTENT_URI, null, where, null, Utils.FIELD_DATE);
+		if(mCursor != null){
+			//検索したデータをもとにアダプターを生成
+			DiaryAdapter adapter = new DiaryAdapter(this, mCursor);
+			
+			//アダプターをListViewに設定
+			getListView().setAdapter(adapter);
+			
 		}
-		return ret;
 	}
-
-
 }
