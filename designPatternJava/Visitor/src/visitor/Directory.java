@@ -29,7 +29,7 @@ public class Directory extends Entry{
 		public Iterator iterator(){ //Iteratorの生成
 			return dir.iterator();
 		}
-		public void accept(Visitor v){ //方も運者の受け入れ
+		public void accept(Visitor v){ //訪問者の受け入れ
 			v.visit(this);
 		}
 

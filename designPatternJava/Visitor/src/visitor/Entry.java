@@ -13,6 +13,6 @@ public abstract class Entry implements Element {
 	}
 	
 	public String toString(){
-		return getName() + "("+getSize()+"(";
+		return getName() + "("+getSize()+")";
 	}
 }
