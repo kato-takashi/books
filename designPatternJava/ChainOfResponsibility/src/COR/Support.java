@@ -1,8 +1,5 @@
 package COR;
 
-import javax.naming.spi.Resolver;
-import javax.security.auth.login.FailedLoginException;
-
 public abstract class Support {
 	private String name; //このトラブル解決者の名前
 	private Support next; //たらい回し先
