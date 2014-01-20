@@ -1,0 +1,1 @@
+293jpg ObserverPattern design pattern
