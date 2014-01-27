@@ -1,0 +1,1 @@
+367jpg Proxy design Pattern 
