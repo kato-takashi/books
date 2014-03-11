@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setTimeOut test</title>
+</head>
+<body>
+	<script>
+		// var ms = new Array('test1', 'test2', 'test3', 'test4');
+			
+		// function msg(){
+		// 	for(var i=0; i < ms.length; i++){
+		// 		console.log(ms[i]);
+		// 		var tm= setTimeout("msg()", 1000);
+		// 	}
+		// }
+		// msg();
+		// 
+		function test1(){
+			console.log('test1');
+		}
+
+		function test2(){
+			console.log('test2');
+		}
+
+		function test3(){
+			console.log('test3');
+		}
+
+		// var tm1 = setTimeout("test1()", 1000);
+		// var tm2 = setTimeout("test2()", 1000);
+		// var tm3 = setTimeout("test3()", 1000);
+
+		for(var i = 1; i<4; i++){
+			setTimeout("test"+i+"()", 1000*i);
+		}
+		
+
+	</script>
+</body>
+</html>

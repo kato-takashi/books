@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>P54 継承</title>
+</head>
+<body>
+	<script>
+
+		var Mammal = function(name){
+			this.name = name;
+		};
+
+		Mammal.prototype.get_name = function(){
+			return this.name;
+		};
+
+		Mammal.prototype.says = function(){
+			return this.saying || '';
+		};
+		// インスタンスの生成
+		// 
+		var myMammal = new Mammal('Herb the Mammal');
+		var name = myMammal.get_name();
+		var name = myMammal.says();
+		console.log('myMammal.get_name '+name);
+		console.log('myMammal.says '+says);
+
+		// Mammalを継承した擬似クラス
+		var Cat = function(name){
+			this.name = name;
+			this.saying = 'meow';
+		};
+
+		Cat.prototype = new Mammal();
+		// 新しいプロトタイプ purrと　get_name目ゾッドを拡張する
+		Cat.prototype.purr = function(n){
+			var i, s = '';
+			for(i=0; i<n; i+=1){
+				if(s){
+					s += '-';
+				}
+				s += 'r';
+			}
+			return s;
+		};
+
+		Cat.prototype.get_name = function(){
+			return this.says() + ' ' + this.name + ' ' + this.says();
+		}
+
+		var myCat = new Cat('Henrietta');
+		var says = myCat.says();
+		console.log('says '+ says);
+		console.log('getName '+ myCat.get_name());
+
+		var purr = myCat.purr(5);
+		console.log('purr '+ purr);
+
+	</script>
+</body>
+</html>
