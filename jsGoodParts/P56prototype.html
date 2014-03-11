@@ -47,12 +47,14 @@
 
 		Cat.prototype.get_name = function(){
 			return this.says() + ' ' + this.name + ' ' + this.says();
-		}
+		}//親メソッドにオーバーライド
 
 		var myCat = new Cat('Henrietta');
 		var says = myCat.says();
 		console.log('says '+ says);
-		console.log('getName '+ myCat.get_name());
+		console.log('myCat.getName '+ myCat.get_name());
+		console.log('parent.myCat.getName '+ parent.myCat.get_name());//親呼び出し
+		console.log('myMammal.getName '+ myMammal.get_name());//親が書き換わっていないか確認
 
 		var purr = myCat.purr(5);
 		console.log('purr '+ purr);
