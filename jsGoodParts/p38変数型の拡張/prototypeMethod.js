@@ -5,7 +5,6 @@ Function.prototype.method = function(name, func){
 }
 
 // 整数型変数が存在しないため、数値の整数部分だけを取り出す
-
 Number.method('integer', function(){
 	return Math[this<0? 'ceil':'floor'](this);
 });

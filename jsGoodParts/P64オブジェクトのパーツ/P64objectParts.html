@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>継承</title>
+</head>
+<body>
+	<script>	
+		var eventuality = function(that){
+			var registry = {};
+			that.fire = function(event){
+			/*
+				オブジェクトのイベントを発生させる。引数eventは
+				イベントの名前を文字列で指定するか、typeプロパティに
+				イベント名を格納したオブジェクトを渡す。
+				するとonメソッドによって登録されたイベントハンドラの中で、
+				該当するイベント名を持つものが呼び出される
+				*/
+			var array, func, handler, i, 
+				type = typeof event === 'string' ? ? event: event.type;
+				/*もししてされたイベントに対するイベントハンドラの配列が存在したら、その中身をループで回して順番にイベントハンドラを実行していく*/
+				if(registry.hasOwnProperty(type)){
+					array = registry[type];
+					for(i=0; i<array.length; i+=1){
+						handler = array[i];
+						/*ハンドラレコードにはmethodとparametersは省略可能であるmethodは実行される関数の名前を表している*/
+						func = handler.method;
+						if(typeof func === 'string'){
+							func = this[func];
+						}
+						/*ハンドラを実行する。もしハンドラレコードにパラメータが用意されていたら、それも渡す。もしパラメータがなければeventオブジェクトを渡す*/
+						func.apply(this, handler.parameters || [event]);
+					}
+				}
+				return this;
+			};
+			that.on. = function(type, method, parameters){
+				/*イベントを登録する。ハンドラレコードを生成し、それをハンドラ一覧に保持する配列を追加する。もし指定されたイベントタイプ用の配列がまだ存在しなければ生成する*/
+				var handler = {
+					method: method, 
+					parameters: parameters
+				};
+				if(registry.hasOwnProperty(type)){
+					registry[type] = [handler];
+				}
+				return this;
+			};
+			return that;
+		};
+	</script>
+</body>
+</html>
