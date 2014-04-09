@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>配列のソート　【区別なし】大文字　小文字</title>
+</head>
+<body>
+	<p></p>
+	<script>	
+		var m = ['aa', 'bb', 'a', 4, 8, 15, 16, 23, 42];
+/*		m.sort(function(a, b){
+			if(a === b){
+				return 0;
+			}if(typeof a === typeof b){
+				return a<b ? -1:1;
+			}
+			return typeof a < typeof b ? -1:1;
+		});*/
+		//
+		//
+		// メソッド化
+		console.log(m); //sort前
+		// 引数arrは配列を格納
+		var str_num_sort = function(arr){
+			return arr.sort(function(a, b){
+				if(a === b){
+					return 0;
+				}if(typeof a === typeof b){
+					return a < b ? -1:1;
+				}
+				return typeof a < typeof b ? -1:1;
+			});			
+		};
+		console.log(str_num_sort(m));　//sort後
+
+		
+	</script>
+</body>
+</html>

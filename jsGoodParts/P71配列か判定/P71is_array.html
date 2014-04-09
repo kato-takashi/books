@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>配列か判断</title>
+</head>
+<body>
+	<p>tet</p>
+	<script>	
+		var is_array = function(value){
+			return value && typeof value === 'object' &&
+			typeof value.length === 'number' &&
+			typeof value.splice === 'function' &&
+			!(value.propertyIsEnumerable('length'));
+		};
+
+		arr01 = ['test1', 'test2'];
+		arr02 = {};
+
+		console.log('arr01: '+is_array(arr01));
+		console.log('arr02: '+is_array(arr02));
+
+	</script>
+</body>
+</html>

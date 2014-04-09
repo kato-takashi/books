@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>配列のメソッド</title>
+</head>
+<body>
+	<p>tet</p>
+	<script>	
+		// 変数型を拡張する
+	Function.prototype.method = function(name, func){
+		this.prototype[name] = func;
+		return this;
+	}
+	Array.method('reduce', function(f, value){
+		var i;
+		for(i=0; i < this.length; i += 1){
+			value = f(this[i], value);
+		}
+		return value;
+	});
+	// 整数の配列を生成する
+	var data = [4, 8, 15, 16, 23, 42];
+	// 2つのシンプルな関数を定義する。一方は2つの値を足し合わせる。もう一方は2つの値を掛け合わせる
+	var add = function(a, b){
+		return a + b;
+	}
+
+	var mult = function(a, b){
+		return a*b;
+	}
+
+	// data reduce メソッドを呼び出し、add関数を渡す
+	var sum = data.reduce(add, 0); 
+	console.log('sum' + sum);
+
+	// data reduce メソッドを呼び出し、mult関数を渡す
+	var product = data.reduce(mult, 1); 
+	console.log('mult' + product);
+
+	// 配列dataに関数totalを追加する
+	data.total = function(){
+		return this.reduce(add, 0);
+	};
+
+	total = data.total();
+
+	console.log('total'+total);
+
+	</script>
+</body>
+</html>
